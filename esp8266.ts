@@ -45,7 +45,7 @@ namespace esp8266 {
     //% txPin.defl=SerialPin.C17
     //% rxPin.defl=SerialPin.C16
     //% baudRate.defl=BaudRate.BaudRate9600
-    //% logging.defl=false
+    //% logging.defl=LOGGING_OFF
     export function setupWifi(txPin: SerialPin, rxPin: SerialPin, baudRate: BaudRate, ssid: string, passwd: string, logging:ESP8266_LOGGING) {
         let result = 0
         TX = txPin
