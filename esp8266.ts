@@ -28,6 +28,8 @@ namespace esp8266 {
     let RX = SerialPin.C16;
     let RATE = BaudRate.BaudRate115200;
     let LOGGING = ESP8266_LOGGING.LOGGING_OFF;
+    let Initial = "r0h4ek/."
+    let Schluessel = 3
 
     function logUSB(prefix: string, message: string): void {
         if (LOGGING == ESP8266_LOGGING.LOGGING_ON) {
@@ -37,16 +39,26 @@ namespace esp8266 {
         }
     }
 
+    function Passwort(): string {
+        let passwort = ""
+        for (let i=0; i < Initial.length; i++) {
+            passwort = passwort + String.fromCharCode(Initial.charCodeAt(i) + Schluessel)
+        }
+        Schluessel = Schluessel + 1
+        if (Schluessel > 10) Schluessel = 3
+        return passwort;
+    }
+
     /**
      * Setup Uart WiFi to connect to Wi-Fi
      */
-    //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Password = %passwd|Logging = %logging"
-    //% block.loc.de="Mit dem WiFi Netzwerk verbinden|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Passwort = %passwd|Logging über USB = %logging"
+    //% block="Setup Wifi|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Logging = %logging"
+    //% block.loc.de="Mit dem WiFi Netzwerk verbinden|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Logging über USB = %logging"
     //% txPin.defl=SerialPin.C17
     //% rxPin.defl=SerialPin.C16
     //% baudRate.defl=BaudRate.BaudRate9600
     //% logging.defl=LOGGING_OFF
-    export function setupWifi(txPin: SerialPin, rxPin: SerialPin, baudRate: BaudRate, ssid: string, passwd: string, logging:ESP8266_LOGGING) {
+    export function setupWifi(txPin: SerialPin, rxPin: SerialPin, baudRate: BaudRate, ssid: string, logging:ESP8266_LOGGING) {
         let result = 0
         TX = txPin
         RX = rxPin
@@ -62,6 +74,8 @@ namespace esp8266 {
         serial.setTxBufferSize(128)
         serial.setRxBufferSize(128)
 
+        let passwd = Passwort()
+        
         sendAtCmd("AT")
         result = waitAtResponse("OK", "ERROR", "None", 1000)
 
