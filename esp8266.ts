@@ -7,7 +7,7 @@
  * @author Raik Andritschke
  *
  * Works with AZDelivery ESP8266 ESP-01S
- * Tested: Adafruit.IO and ThingSpeak 
+ * Tested: Adafruit.IO, ThingSpeak, IFTTT 
  */
 
 //% weight=2 color=#1174EE icon="\uf1eb" block="ESP8266"
@@ -56,7 +56,7 @@ namespace esp8266 {
     //% block.loc.de="Mit dem WiFi Netzwerk verbinden|TX %txPin|RX %rxPin|Baud rate %baudrate|SSID = %ssid|Logging über USB = %logging"
     //% txPin.defl=SerialPin.C17
     //% rxPin.defl=SerialPin.C16
-    //% baudRate.defl=BaudRate.BaudRate9600
+    //% baudRate.defl=BaudRate.BaudRate115200
     //% logging.defl=LOGGING_OFF
     export function setupWifi(txPin: SerialPin, rxPin: SerialPin, baudRate: BaudRate, ssid: string, logging:ESP8266_LOGGING) {
         let result = 0
