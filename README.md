@@ -19,6 +19,5 @@ Read more at /extensions
 
 ## Supported targets
 
-* for PXT/microbit
 * for PXT/calliope
 
