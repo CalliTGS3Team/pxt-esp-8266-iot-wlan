@@ -1,4 +1,4 @@
-# pxt-esp-thingspeak
+# pxt-esp-8266-iot
 
 
 
